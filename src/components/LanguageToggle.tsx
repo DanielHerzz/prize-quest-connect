@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { globe } from "lucide-react";
+import { Globe } from "lucide-react";
 
 export type Language = 'ar' | 'en';
 
@@ -34,7 +34,7 @@ const LanguageToggle = ({ onLanguageChange }: LanguageToggleProps) => {
       onClick={toggleLanguage}
       className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 text-white"
     >
-      <globe className="h-4 w-4 mr-2" />
+      <Globe className="h-4 w-4 mr-2" />
       {currentLang === 'ar' ? 'English' : 'العربية'}
     </Button>
   );

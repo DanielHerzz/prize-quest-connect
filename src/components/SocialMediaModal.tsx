@@ -2,10 +2,13 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Gift, Star, Users, Clock, CheckCircle, Copy } from "lucide-react";
+import { Gift } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import SocialPlatformCard from "./social/SocialPlatformCard";
+import NextDrawCountdown from "./social/NextDrawCountdown";
+import ReferralSystem from "./social/ReferralSystem";
+import BonusTracker from "./social/BonusTracker";
+import VerificationNote from "./social/VerificationNote";
 
 interface SocialMediaModalProps {
   isOpen: boolean;
@@ -14,7 +17,6 @@ interface SocialMediaModalProps {
 
 const SocialMediaModal = ({ isOpen, onClose }: SocialMediaModalProps) => {
   const [completedActions, setCompletedActions] = useState<string[]>([]);
-  const [referralCode] = useState(() => `REF${Date.now().toString(36).toUpperCase()}`);
   const { toast } = useToast();
 
   const socialPlatforms = [
@@ -56,10 +58,8 @@ const SocialMediaModal = ({ isOpen, onClose }: SocialMediaModalProps) => {
   const handleSocialClick = (platform: any) => {
     console.log(`User clicked ${platform.name}`);
     
-    // Simulate opening the link
     window.open(platform.url, '_blank');
     
-    // Mark as completed
     if (!completedActions.includes(platform.id)) {
       setCompletedActions([...completedActions, platform.id]);
       
@@ -90,14 +90,6 @@ const SocialMediaModal = ({ isOpen, onClose }: SocialMediaModalProps) => {
     }, 2000);
   };
 
-  const copyReferralCode = () => {
-    navigator.clipboard.writeText(`https://yourdomain.com/?ref=${referralCode}`);
-    toast({
-      title: "تم نسخ رابط الإحالة! 📋",
-      description: "شارك هذا الرابط مع أصدقائك واحصل على سحوبات إضافية",
-    });
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 border border-white/20">
@@ -117,132 +109,30 @@ const SocialMediaModal = ({ isOpen, onClose }: SocialMediaModalProps) => {
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Next Draw Countdown */}
-          <Card className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/30">
-            <CardContent className="p-6 text-center">
-              <Clock className="w-12 h-12 text-yellow-400 mx-auto mb-3" />
-              <h3 className="text-xl font-bold text-white mb-2">السحب القادم خلال</h3>
-              <div className="text-3xl font-bold text-yellow-400 mb-2">3 أيام و 14 ساعة</div>
-              <p className="text-gray-300">لا تفوت فرصتك! انضم لقنواتنا للحصول على إشعار فوري عند إعلان النتائج</p>
-            </CardContent>
-          </Card>
+          <NextDrawCountdown />
 
-          {/* Social Media Platforms */}
           <div className="grid md:grid-cols-3 gap-4">
             {socialPlatforms.map((platform) => {
               const isCompleted = completedActions.includes(platform.id);
               
               return (
-                <Card key={platform.id} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 relative">
-                  {platform.priority === 1 && (
-                    <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                      الأهم
-                    </div>
-                  )}
-                  
-                  <CardContent className="p-6 space-y-4">
-                    <div className="text-center">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${platform.color} rounded-full flex items-center justify-center mx-auto mb-3 text-2xl`}>
-                        {platform.icon}
-                      </div>
-                      
-                      <h3 className="text-lg font-bold text-white mb-2">{platform.name}</h3>
-                      <p className="text-gray-300 text-sm mb-3">{platform.description}</p>
-                      
-                      <div className="flex items-center justify-center space-x-2 mb-3">
-                        <Users className="w-4 h-4 text-gray-400" />
-                        <span className="text-gray-400 text-sm">{platform.followers} متابع</span>
-                      </div>
-                      
-                      <Badge className="bg-green-500/20 text-green-400 mb-4">
-                        🎁 {platform.benefit}
-                      </Badge>
-                    </div>
-                    
-                    <Button 
-                      onClick={() => handleSocialClick(platform)}
-                      className={`w-full ${isCompleted 
-                        ? 'bg-green-500 hover:bg-green-600' 
-                        : `bg-gradient-to-r ${platform.color} hover:opacity-90`
-                      }`}
-                      disabled={isCompleted}
-                    >
-                      {isCompleted ? (
-                        <>
-                          <CheckCircle className="w-4 h-4 mr-2" />
-                          تم الانضمام ✓
-                        </>
-                      ) : (
-                        <>
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          انضم الآن ({platform.priority === 1 ? '+2' : '+1'} سحب)
-                        </>
-                      )}
-                    </Button>
-                  </CardContent>
-                </Card>
+                <SocialPlatformCard
+                  key={platform.id}
+                  platform={platform}
+                  isCompleted={isCompleted}
+                  onPlatformClick={handleSocialClick}
+                />
               );
             })}
           </div>
 
-          {/* Referral System */}
-          <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">
-                <Gift className="w-6 h-6 inline mr-2" />
-                نظام الإحالة - اربح سحوبات إضافية!
-              </h3>
-              
-              <div className="bg-white/10 rounded-lg p-4 mb-4">
-                <p className="text-gray-300 text-sm mb-3">رابط الإحالة الخاص بك:</p>
-                <div className="flex items-center space-x-2">
-                  <input 
-                    type="text" 
-                    value={`https://yourdomain.com/?ref=${referralCode}`}
-                    readOnly 
-                    className="flex-1 bg-white/20 border border-white/30 rounded px-3 py-2 text-white text-sm"
-                  />
-                  <Button onClick={copyReferralCode} size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                    <Copy className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-4 text-center">
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-green-400">+3</div>
-                  <div className="text-sm text-gray-300">سحوبات لكل صديق يشترك</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-blue-400">+1</div>
-                  <div className="text-sm text-gray-300">سحب إضافي لك أيضاً</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <ReferralSystem />
 
-          {/* Bonus Tracking */}
-          {completedActions.length > 0 && (
-            <Card className="bg-gradient-to-r from-green-500/20 to-blue-500/20 border-green-500/30">
-              <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-white mb-2">مكافآتك المتراكمة</h3>
-                <p className="text-green-400 text-3xl font-bold mb-2">
-                  +{completedActions.length + (completedActions.includes('telegram') ? 1 : 0)} سحب إضافي!
-                </p>
-                <p className="text-gray-300 text-sm mb-4">
-                  انضممت إلى {completedActions.length} من أصل {socialPlatforms.length} قناة
-                </p>
-                <div className="w-full bg-gray-700 rounded-full h-3 mb-4">
-                  <div 
-                    className="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${(completedActions.length / socialPlatforms.length) * 100}%` }}
-                  ></div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          <BonusTracker 
+            completedActions={completedActions} 
+            totalPlatforms={socialPlatforms.length} 
+          />
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
               onClick={handleClaimBonus}
@@ -262,21 +152,7 @@ const SocialMediaModal = ({ isOpen, onClose }: SocialMediaModalProps) => {
             </Button>
           </div>
 
-          {/* Verification Note */}
-          <Card className="bg-blue-500/20 border-blue-500/30">
-            <CardContent className="p-4">
-              <div className="flex items-start space-x-3">
-                <CheckCircle className="w-6 h-6 text-blue-400 mt-1" />
-                <div>
-                  <h4 className="text-white font-medium mb-1">التحقق التلقائي من الانضمام</h4>
-                  <p className="text-gray-300 text-sm">
-                    يتم التحقق من انضمامك تلقائياً خلال 24 ساعة. ستتلقى إشعاراً بإضافة السحوبات الإضافية لحسابك.
-                    للحصول على تأكيد فوري، تأكد من تفعيل الإشعارات في قناة Telegram.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <VerificationNote />
         </div>
       </DialogContent>
     </Dialog>
