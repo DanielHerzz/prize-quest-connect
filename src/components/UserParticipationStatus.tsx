@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface UserParticipation {
   email: string;
@@ -12,6 +13,7 @@ interface UserParticipation {
 }
 
 const UserParticipationStatus = () => {
+  const { t } = useTranslation();
   const [userParticipations, setUserParticipations] = useState<UserParticipation[]>([]);
 
   useEffect(() => {
@@ -38,11 +40,11 @@ const UserParticipationStatus = () => {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'مؤهل للسحب';
+        return t('participation.qualified');
       case 'pending':
-        return 'بانتظار التحقق';
+        return t('participation.pending');
       case 'failed':
-        return 'لم يكتمل العرض';
+        return t('participation.failed');
       default:
         return 'غير معروف';
     }
@@ -68,7 +70,7 @@ const UserParticipationStatus = () => {
   return (
     <Card className="bg-white/10 backdrop-blur-sm border-white/20 mb-8">
       <CardContent className="p-6">
-        <h3 className="text-xl font-bold text-white mb-4">حالة مشاركاتك</h3>
+        <h3 className="text-xl font-bold text-white mb-4">{t('participation.yourStatus')}</h3>
         <div className="space-y-3">
           {userParticipations.map((participation, index) => (
             <div key={index} className="flex items-center justify-between bg-white/5 rounded-lg p-3">

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import Header from "@/components/Header";
 import OffersSection from "@/components/OffersSection";
+import SocialMediaSection from "@/components/SocialMediaSection";
+import DrawProofSection from "@/components/DrawProofSection";
 import SocialMediaModal from "@/components/SocialMediaModal";
 import WinnersList from "@/components/WinnersList";
 import ParticipationModal from "@/components/ParticipationModal";
@@ -167,7 +168,7 @@ const Index = () => {
               className="border-blue-500/50 text-blue-300 hover:bg-blue-500/20 mb-8"
             >
               <Shield className="w-4 h-4 mr-2" />
-              كيف يتم اختيار الفائزين؟
+              {t('transparency.title')}
             </Button>
           </div>
         </div>
@@ -219,9 +220,9 @@ const Index = () => {
                     
                     <div className="text-center text-sm text-gray-400">
                       {prize.remainingParticipants > 0 ? (
-                        <p>السحب عند اكتمال {prize.maxParticipants} مشارك</p>
+                        <p>{t('prizes.drawWhenComplete')} {prize.maxParticipants} {t('prizes.participant')}</p>
                       ) : (
-                        <p className="text-red-400">مكتمل - جاري التحضير للسحب</p>
+                        <p className="text-red-400">{t('prizes.completed')}</p>
                       )}
                     </div>
                   </div>
@@ -232,7 +233,7 @@ const Index = () => {
                     className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Target className="w-4 h-4 mr-2" />
-                    {prize.remainingParticipants <= 0 ? "مكتمل" : t('button.participateInDraw')}
+                    {prize.remainingParticipants <= 0 ? t('button.completed') : t('button.participateInDraw')}
                   </Button>
                 </CardContent>
               </Card>
@@ -240,6 +241,12 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* Social Media Section */}
+      <SocialMediaSection />
+
+      {/* Draw Proof Section */}
+      <DrawProofSection />
 
       {/* Offers Section */}
       <OffersSection />

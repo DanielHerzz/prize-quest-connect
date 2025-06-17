@@ -49,9 +49,80 @@ const translations: Translations = {
     ar: 'المشاركات المتبقية',
     en: 'Remaining Participants'
   },
+  'prizes.drawWhenComplete': {
+    ar: 'السحب عند اكتمال',
+    en: 'Draw when'
+  },
+  'prizes.participant': {
+    ar: 'مشارك',
+    en: 'participants complete'
+  },
+  'prizes.completed': {
+    ar: 'مكتمل - جاري التحضير للسحب',
+    en: 'Completed - Preparing for draw'
+  },
   'button.participateInDraw': {
     ar: 'شارك في السحب',
     en: 'Participate in Draw'
+  },
+  'button.completed': {
+    ar: 'مكتمل',
+    en: 'Completed'
+  },
+  // Social Media
+  'social.followUs': {
+    ar: 'تابعنا على وسائل التواصل',
+    en: 'Follow Us on Social Media'
+  },
+  'social.getUpdates': {
+    ar: 'احصل على التحديثات الفورية وفرص إضافية للفوز',
+    en: 'Get instant updates and additional chances to win'
+  },
+  'social.telegram': {
+    ar: 'انضم لقناة تليجرام',
+    en: 'Join Telegram Channel'
+  },
+  'social.facebook': {
+    ar: 'تابعنا على فيسبوك',
+    en: 'Follow on Facebook'
+  },
+  'social.instagram': {
+    ar: 'تابعنا على إنستاجرام',
+    en: 'Follow on Instagram'
+  },
+  // Draw Countdown
+  'countdown.nextDraw': {
+    ar: 'السحب القادم خلال',
+    en: 'Next Draw In'
+  },
+  'countdown.days': {
+    ar: 'يوم',
+    en: 'Days'
+  },
+  'countdown.hours': {
+    ar: 'ساعة',
+    en: 'Hours'
+  },
+  'countdown.minutes': {
+    ar: 'دقيقة',
+    en: 'Minutes'
+  },
+  'countdown.seconds': {
+    ar: 'ثانية',
+    en: 'Seconds'
+  },
+  'countdown.automatic': {
+    ar: 'السحب يتم تلقائيًا عند انتهاء الوقت أو اكتمال العدد المطلوب',
+    en: 'Draw happens automatically when time ends or required number is reached'
+  },
+  // Transparency
+  'transparency.title': {
+    ar: 'كيف يتم اختيار الفائزين؟',
+    en: 'How are winners selected?'
+  },
+  'transparency.proof': {
+    ar: 'إثبات السحب',
+    en: 'Draw Proof'
   },
   // Registration
   'registration.startNow': {
@@ -82,6 +153,63 @@ const translations: Translations = {
   'winners.subtitle': {
     ar: 'جميع الفائزين حقيقيون ومؤكدون مع إثباتات الاستلام',
     en: 'All winners are real and verified with delivery proofs'
+  },
+  'winners.winner': {
+    ar: 'الفائز:',
+    en: 'Winner:'
+  },
+  'winners.delivered': {
+    ar: 'تم تسليم الجائزة بنجاح',
+    en: 'Prize delivered successfully'
+  },
+  'winners.transparency': {
+    ar: 'شفافية كاملة',
+    en: 'Complete Transparency'
+  },
+  'winners.fairDraw': {
+    ar: 'سحب عادل',
+    en: 'Fair Draw'
+  },
+  'winners.randomAlgorithm': {
+    ar: 'خوارزمية عشوائية',
+    en: 'Random Algorithm'
+  },
+  'winners.guaranteedDelivery': {
+    ar: 'تسليم مضمون',
+    en: 'Guaranteed Delivery'
+  },
+  'winners.deliveryTime': {
+    ar: 'خلال 3-5 أيام',
+    en: 'Within 3-5 days'
+  },
+  'winners.regularProofs': {
+    ar: 'إثباتات دورية',
+    en: 'Regular Proofs'
+  },
+  'winners.weeklyUpdate': {
+    ar: 'تحديث أسبوعي',
+    en: 'Weekly Update'
+  },
+  'winners.description': {
+    ar: 'جميع الفائزين حقيقيون ويتم الإعلان عنهم فور إجراء السحب. نحن نؤمن بالشفافية الكاملة ونشارك إثباتات تسليم الجوائز.',
+    en: 'All winners are real and announced immediately after the draw. We believe in complete transparency and share proof of prize delivery.'
+  },
+  // Participation Status
+  'participation.yourStatus': {
+    ar: 'حالة مشاركاتك',
+    en: 'Your Participation Status'
+  },
+  'participation.qualified': {
+    ar: 'مؤهل للسحب',
+    en: 'Qualified for Draw'
+  },
+  'participation.pending': {
+    ar: 'بانتظار التحقق',
+    en: 'Pending Verification'
+  },
+  'participation.failed': {
+    ar: 'لم يكتمل العرض',
+    en: 'Offer Not Completed'
   }
 };
 

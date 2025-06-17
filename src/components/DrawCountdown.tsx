@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Trophy } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const DrawCountdown = () => {
+  const { t } = useTranslation();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -42,31 +44,31 @@ const DrawCountdown = () => {
         <div className="text-center">
           <div className="flex items-center justify-center mb-4">
             <Trophy className="w-8 h-8 text-yellow-400 mr-3" />
-            <h2 className="text-2xl font-bold text-white">السحب القادم خلال</h2>
+            <h2 className="text-2xl font-bold text-white">{t('countdown.nextDraw')}</h2>
           </div>
           
           <div className="grid grid-cols-4 gap-4 mb-4">
             <div className="bg-white/10 rounded-lg p-4">
               <div className="text-3xl font-bold text-red-400">{timeLeft.days}</div>
-              <div className="text-sm text-gray-300">يوم</div>
+              <div className="text-sm text-gray-300">{t('countdown.days')}</div>
             </div>
             <div className="bg-white/10 rounded-lg p-4">
               <div className="text-3xl font-bold text-orange-400">{timeLeft.hours}</div>
-              <div className="text-sm text-gray-300">ساعة</div>
+              <div className="text-sm text-gray-300">{t('countdown.hours')}</div>
             </div>
             <div className="bg-white/10 rounded-lg p-4">
               <div className="text-3xl font-bold text-yellow-400">{timeLeft.minutes}</div>
-              <div className="text-sm text-gray-300">دقيقة</div>
+              <div className="text-sm text-gray-300">{t('countdown.minutes')}</div>
             </div>
             <div className="bg-white/10 rounded-lg p-4">
               <div className="text-3xl font-bold text-green-400">{timeLeft.seconds}</div>
-              <div className="text-sm text-gray-300">ثانية</div>
+              <div className="text-sm text-gray-300">{t('countdown.seconds')}</div>
             </div>
           </div>
           
           <div className="flex items-center justify-center text-gray-300">
             <Clock className="w-4 h-4 mr-2" />
-            <span>السحب يتم تلقائيًا عند انتهاء الوقت أو اكتمال العدد المطلوب</span>
+            <span>{t('countdown.automatic')}</span>
           </div>
         </div>
       </CardContent>
