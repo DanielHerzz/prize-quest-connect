@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Gift, Users, Star, Clock, Target } from "lucide-react";
+import { Trophy, Gift, Users, Star, Clock, Target, Shield, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import Header from "@/components/Header";
@@ -11,11 +11,18 @@ import OffersSection from "@/components/OffersSection";
 import SocialMediaModal from "@/components/SocialMediaModal";
 import WinnersList from "@/components/WinnersList";
 import ParticipationModal from "@/components/ParticipationModal";
+import ParticipationSuccessModal from "@/components/ParticipationSuccessModal";
+import DrawCountdown from "@/components/DrawCountdown";
+import TransparencyModal from "@/components/TransparencyModal";
+import UserParticipationStatus from "@/components/UserParticipationStatus";
 
 const Index = () => {
   const [selectedPrize, setSelectedPrize] = useState(null);
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [showParticipationModal, setShowParticipationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showTransparencyModal, setShowTransparencyModal] = useState(false);
+  const [participantEmail, setParticipantEmail] = useState("");
   const { t, changeLanguage } = useTranslation();
   const { toast } = useToast();
 
@@ -83,17 +90,33 @@ const Index = () => {
         )
       );
 
+      // Save user participation status
+      const userParticipation = {
+        email: email,
+        prize: selectedPrize.name,
+        status: 'completed',
+        timestamp: new Date().toISOString()
+      };
+      
+      const existingParticipations = JSON.parse(localStorage.getItem('userParticipations') || '[]');
+      existingParticipations.push(userParticipation);
+      localStorage.setItem('userParticipations', JSON.stringify(existingParticipations));
+
       // Generate SubID for tracking
       const subId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
-      // In real implementation, save to Firebase and redirect to OGAds
       console.log(`User ${email} registered for ${selectedPrize.name} with SubID: ${subId}`);
       
-      // Show social media modal after participation
-      setTimeout(() => {
-        setShowSocialModal(true);
-      }, 2000);
+      setParticipantEmail(email);
+      setShowSuccessModal(true);
     }
+  };
+
+  const handleSuccessModalContinue = () => {
+    setShowSuccessModal(false);
+    setTimeout(() => {
+      setShowSocialModal(true);
+    }, 500);
   };
 
   return (
@@ -136,67 +159,85 @@ const Index = () => {
                 <p className="text-sm text-gray-300">{t('stats.continuous')}</p>
               </div>
             </div>
+
+            {/* Transparency Button */}
+            <Button 
+              onClick={() => setShowTransparencyModal(true)}
+              variant="outline"
+              className="border-blue-500/50 text-blue-300 hover:bg-blue-500/20 mb-8"
+            >
+              <Shield className="w-4 h-4 mr-2" />
+              كيف يتم اختيار الفائزين؟
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Current Prizes */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">{t('prizes.availableNow')}</h2>
-          <p className="text-xl text-gray-300">{t('prizes.chooseToParticipate')}</p>
-        </div>
+      <div className="container mx-auto px-4">
+        {/* Draw Countdown */}
+        <DrawCountdown />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {prizes.map((prize) => (
-            <Card key={prize.id} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-              <CardHeader className="text-center">
-                <div className="text-6xl mb-4">{prize.image}</div>
-                <CardTitle className="text-white">{prize.name}</CardTitle>
-                <CardDescription className="text-green-400 text-2xl font-bold">{prize.value}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-gray-300">
-                    <span>{t('prizes.participantsRemaining')}:</span>
-                    <Badge variant="secondary" className={
-                      prize.remainingParticipants <= 10 ? "bg-red-500/20 text-red-400" :
-                      prize.remainingParticipants <= 30 ? "bg-yellow-500/20 text-yellow-400" :
-                      "bg-green-500/20 text-green-400"
-                    }>
-                      {prize.remainingParticipants}
-                    </Badge>
+        {/* User Participation Status */}
+        <UserParticipationStatus />
+
+        {/* Current Prizes */}
+        <div className="py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">{t('prizes.availableNow')}</h2>
+            <p className="text-xl text-gray-300">{t('prizes.chooseToParticipate')}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {prizes.map((prize) => (
+              <Card key={prize.id} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                <CardHeader className="text-center">
+                  <div className="text-6xl mb-4">{prize.image}</div>
+                  <CardTitle className="text-white">{prize.name}</CardTitle>
+                  <CardDescription className="text-green-400 text-2xl font-bold">{prize.value}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between text-gray-300">
+                      <span>{t('prizes.participantsRemaining')}:</span>
+                      <Badge variant="secondary" className={
+                        prize.remainingParticipants <= 10 ? "bg-red-500/20 text-red-400" :
+                        prize.remainingParticipants <= 30 ? "bg-yellow-500/20 text-yellow-400" :
+                        "bg-green-500/20 text-green-400"
+                      }>
+                        {prize.remainingParticipants}
+                      </Badge>
+                    </div>
+                    
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                        style={{ 
+                          width: `${((prize.maxParticipants - prize.remainingParticipants) / prize.maxParticipants) * 100}%` 
+                        }}
+                      ></div>
+                    </div>
+                    
+                    <div className="text-center text-sm text-gray-400">
+                      {prize.remainingParticipants > 0 ? (
+                        <p>السحب عند اكتمال {prize.maxParticipants} مشارك</p>
+                      ) : (
+                        <p className="text-red-400">مكتمل - جاري التحضير للسحب</p>
+                      )}
+                    </div>
                   </div>
                   
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300"
-                      style={{ 
-                        width: `${((prize.maxParticipants - prize.remainingParticipants) / prize.maxParticipants) * 100}%` 
-                      }}
-                    ></div>
-                  </div>
-                  
-                  <div className="text-center text-sm text-gray-400">
-                    {prize.remainingParticipants > 0 ? (
-                      <p>السحب عند اكتمال {prize.maxParticipants} مشارك</p>
-                    ) : (
-                      <p className="text-red-400">مكتمل - جاري التحضير للسحب</p>
-                    )}
-                  </div>
-                </div>
-                
-                <Button 
-                  onClick={() => handlePrizeClick(prize)}
-                  disabled={prize.remainingParticipants <= 0}
-                  className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Target className="w-4 h-4 mr-2" />
-                  {prize.remainingParticipants <= 0 ? "مكتمل" : t('button.participateInDraw')}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                  <Button 
+                    onClick={() => handlePrizeClick(prize)}
+                    disabled={prize.remainingParticipants <= 0}
+                    className="w-full mt-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Target className="w-4 h-4 mr-2" />
+                    {prize.remainingParticipants <= 0 ? "مكتمل" : t('button.participateInDraw')}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -214,10 +255,25 @@ const Index = () => {
         onParticipate={handleParticipation}
       />
 
+      {/* Success Modal */}
+      <ParticipationSuccessModal 
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        onContinueToSocial={handleSuccessModalContinue}
+        email={participantEmail}
+        prizeName={selectedPrize?.name || ""}
+      />
+
       {/* Social Media Modal */}
       <SocialMediaModal 
         isOpen={showSocialModal} 
         onClose={() => setShowSocialModal(false)} 
+      />
+
+      {/* Transparency Modal */}
+      <TransparencyModal 
+        isOpen={showTransparencyModal}
+        onClose={() => setShowTransparencyModal(false)}
       />
     </div>
   );
