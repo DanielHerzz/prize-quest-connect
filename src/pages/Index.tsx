@@ -16,6 +16,7 @@ import ParticipationSuccessModal from "@/components/ParticipationSuccessModal";
 import DrawCountdown from "@/components/DrawCountdown";
 import TransparencyModal from "@/components/TransparencyModal";
 import UserParticipationStatus from "@/components/UserParticipationStatus";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [selectedPrize, setSelectedPrize] = useState(null);
@@ -121,7 +122,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       <Header onLanguageChange={changeLanguage} />
       
       {/* Hero Section */}
@@ -282,6 +283,8 @@ const Index = () => {
         isOpen={showTransparencyModal}
         onClose={() => setShowTransparencyModal(false)}
       />
+
+      <Footer />
     </div>
   );
 };

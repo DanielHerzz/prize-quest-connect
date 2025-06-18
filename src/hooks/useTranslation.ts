@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react';
 
 export type Language = 'ar' | 'en';
@@ -211,6 +210,239 @@ const translations: Translations = {
     ar: 'لم يكتمل العرض',
     en: 'Offer Not Completed'
   }
+  ,
+  // Draw Proof translations
+  'proof.drawProof': {
+    ar: 'إثبات السحب',
+    en: 'Draw Proof'
+  },
+  'proof.verified': {
+    ar: 'موثق',
+    en: 'Verified'
+  },
+  'proof.video': {
+    ar: 'فيديو السحب',
+    en: 'Draw Video'
+  },
+  'proof.image': {
+    ar: 'صورة السحب',
+    en: 'Draw Image'
+  },
+  'proof.document': {
+    ar: 'وثيقة السحب',
+    en: 'Draw Document'
+  },
+  'proof.unknown': {
+    ar: 'غير محدد',
+    en: 'Unknown'
+  },
+  'proof.viewProof': {
+    ar: 'عرض الإثبات',
+    en: 'View Proof'
+  },
+  
+  // Admin Panel translations
+  'admin.title': {
+    ar: 'لوحة الإدارة',
+    en: 'Admin Panel'
+  },
+  'admin.subtitle': {
+    ar: 'إدارة المشاركين والإحصائيات',
+    en: 'Manage participants and statistics'
+  },
+  'admin.totalParticipants': {
+    ar: 'إجمالي المشاركين',
+    en: 'Total Participants'
+  },
+  'admin.completedOffers': {
+    ar: 'العروض المكتملة',
+    en: 'Completed Offers'
+  },
+  'admin.conversionRate': {
+    ar: 'معدل التحويل',
+    en: 'Conversion Rate'
+  },
+  'admin.totalPrizes': {
+    ar: 'إجمالي الجوائز',
+    en: 'Total Prizes'
+  },
+  'admin.participants': {
+    ar: 'المشاركون',
+    en: 'Participants'
+  },
+  'admin.offerStats': {
+    ar: 'إحصائيات العروض',
+    en: 'Offer Statistics'
+  },
+  'admin.privacy': {
+    ar: 'الخصوصية',
+    en: 'Privacy'
+  },
+  'admin.participantsList': {
+    ar: 'قائمة المشاركين',
+    en: 'Participants List'
+  },
+  'admin.email': {
+    ar: 'البريد الإلكتروني',
+    en: 'Email'
+  },
+  'admin.prize': {
+    ar: 'الجائزة',
+    en: 'Prize'
+  },
+  'admin.status': {
+    ar: 'الحالة',
+    en: 'Status'
+  },
+  'admin.joinDate': {
+    ar: 'تاريخ الانضمام',
+    en: 'Join Date'
+  },
+  'admin.actions': {
+    ar: 'الإجراءات',
+    en: 'Actions'
+  },
+  'admin.completed': {
+    ar: 'مكتمل',
+    en: 'Completed'
+  },
+  'admin.pending': {
+    ar: 'في الانتظار',
+    en: 'Pending'
+  },
+  'admin.failed': {
+    ar: 'فشل',
+    en: 'Failed'
+  },
+  'admin.viewDetails': {
+    ar: 'عرض التفاصيل',
+    en: 'View Details'
+  },
+  'admin.offerPerformance': {
+    ar: 'أداء العروض',
+    en: 'Offer Performance'
+  },
+  'admin.completions': {
+    ar: 'إكمال',
+    en: 'completions'
+  },
+  'admin.privacyCompliance': {
+    ar: 'الامتثال للخصوصية',
+    en: 'Privacy Compliance'
+  },
+  'admin.exportData': {
+    ar: 'تصدير البيانات',
+    en: 'Export Data'
+  },
+  'admin.deleteUserData': {
+    ar: 'حذف بيانات المستخدم',
+    en: 'Delete User Data'
+  },
+  'admin.gdprCompliant': {
+    ar: 'متوافق مع GDPR',
+    en: 'GDPR Compliant'
+  },
+  'admin.dataEncrypted': {
+    ar: 'البيانات مشفرة',
+    en: 'Data Encrypted'
+  },
+  'admin.regularBackups': {
+    ar: 'نسخ احتياطية منتظمة',
+    en: 'Regular Backups'
+  },
+  
+  // Footer translations
+  'footer.about': {
+    ar: 'حول الموقع',
+    en: 'About Us'
+  },
+  'footer.description': {
+    ar: 'منصة موثوقة للمسابقات والجوائز مع ضمان الشفافية والعدالة في جميع السحوبات.',
+    en: 'Trusted platform for contests and prizes with guaranteed transparency and fairness in all draws.'
+  },
+  'footer.legal': {
+    ar: 'الشؤون القانونية',
+    en: 'Legal'
+  },
+  'footer.privacy': {
+    ar: 'سياسة الخصوصية',
+    en: 'Privacy Policy'
+  },
+  'footer.terms': {
+    ar: 'شروط المشاركة',
+    en: 'Terms of Service'
+  },
+  'footer.dataProtection': {
+    ar: 'حماية البيانات',
+    en: 'Data Protection'
+  },
+  'footer.contact': {
+    ar: 'تواصل معنا',
+    en: 'Contact Us'
+  },
+  'footer.support': {
+    ar: 'الدعم الفني',
+    en: 'Support'
+  },
+  'footer.business': {
+    ar: 'الأعمال',
+    en: 'Business'
+  },
+  'footer.allRights': {
+    ar: 'جميع الحقوق محفوظة',
+    en: 'All rights reserved'
+  },
+  'footer.fairPlay': {
+    ar: 'لعب عادل ونزيه',
+    en: 'Fair and honest play'
+  },
+  
+  // Modal translations
+  'modal.close': {
+    ar: 'إغلاق',
+    en: 'Close'
+  },
+  'modal.confirm': {
+    ar: 'تأكيد',
+    en: 'Confirm'
+  },
+  'modal.cancel': {
+    ar: 'إلغاء',
+    en: 'Cancel'
+  },
+    // ParticipationSuccessModal additional translations
+    'participation.congratulations': {
+      ar: 'تهانينا!',
+      en: 'Congratulations!'
+    },
+    'participation.confirmed': {
+      ar: 'تم تأكيد مشاركتك بنجاح',
+      en: 'Your participation has been confirmed successfully'
+    },
+    'participation.details': {
+      ar: 'تفاصيل مشاركتك',
+      en: 'Your Participation Details'
+    },
+    'participation.nextSteps': {
+      ar: 'الخطوات التالية',
+      en: 'Next Steps'
+    },
+    'participation.followSocial': {
+      ar: 'تابع قنواتنا الاجتماعية لتصلك النتائج فور إعلانها + احصل على فرص إضافية للفوز!',
+      en: 'Follow our social channels to get results as soon as they are announced + get additional chances to win!'
+    },
+    'participation.followForBonus': {
+      ar: 'تابع قنواتنا واحصل على فرص إضافية',
+      en: 'Follow our channels and get additional chances'
+    },
+    'participation.backToSite': {
+      ar: 'العودة للموقع',
+      en: 'Back to Site'
+    },
+    'participation.emailNotification': {
+      ar: 'ستتلقى إشعارًا عبر البريد الإلكتروني عند إعلان النتائج',
+      en: 'You will receive an email notification when results are announced'
+    },
 };
 
 export const useTranslation = () => {
