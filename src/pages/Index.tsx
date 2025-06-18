@@ -245,9 +245,6 @@ const Index = () => {
       {/* Social Media Section */}
       <SocialMediaSection />
 
-      {/* Draw Proof Section */}
-      <DrawProofSection />
-
       {/* Offers Section */}
       <OffersSection />
 
