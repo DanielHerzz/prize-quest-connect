@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Trophy, Calendar, Gift, Shield, Video, FileText, CheckCircle, ExternalLink } from "lucide-react";
+import { Trophy, Calendar, Gift, Shield, Video, FileText, CheckCircle, ExternalLink, Eye } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const WinnersList = () => {
@@ -18,7 +18,9 @@ const WinnersList = () => {
       proofImage: "📱",
       proofType: "video",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery1",
+      drawProof: "https://example.com/draw1"
     },
     {
       id: 2,
@@ -29,7 +31,9 @@ const WinnersList = () => {
       proofImage: "🎮",
       proofType: "image",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery2",
+      drawProof: "https://example.com/draw2"
     },
     {
       id: 3,
@@ -40,7 +44,9 @@ const WinnersList = () => {
       proofImage: "💰",
       proofType: "document",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery3",
+      drawProof: "https://example.com/draw3"
     },
     {
       id: 4,
@@ -51,7 +57,9 @@ const WinnersList = () => {
       proofImage: "💻",
       proofType: "video",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery4",
+      drawProof: "https://example.com/draw4"
     },
     {
       id: 5,
@@ -62,7 +70,9 @@ const WinnersList = () => {
       proofImage: "🎁",
       proofType: "image",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery5",
+      drawProof: "https://example.com/draw5"
     },
     {
       id: 6,
@@ -73,7 +83,9 @@ const WinnersList = () => {
       proofImage: "💳",
       proofType: "document",
       proofUrl: "#",
-      verified: true
+      verified: true,
+      deliveryProof: "https://example.com/delivery6",
+      drawProof: "https://example.com/draw6"
     }
   ];
 
@@ -104,16 +116,69 @@ const WinnersList = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 bg-gradient-to-b from-transparent to-black/20">
+    <div className="container mx-auto px-4 py-16 bg-gradient-main min-h-screen">
       <div className="text-center mb-12">
         <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
         <h2 className="text-4xl font-bold text-white mb-4">🏆 {t('winners.title')}</h2>
-        <p className="text-xl text-gray-300">{t('winners.subtitle')}</p>
+        <p className="text-xl text-gray-200 dark:text-gray-300">{t('winners.subtitle')}</p>
       </div>
 
+      {/* Draw Proof Section */}
+      <div className="mb-16">
+        <div className="text-center mb-8">
+          <Shield className="w-12 h-12 text-green-400 mx-auto mb-4" />
+          <h3 className="text-3xl font-bold text-white mb-2">{t('transparency.proof')}</h3>
+          <p className="text-lg text-gray-200 dark:text-gray-300">{t('transparency.description')}</p>
+        </div>
+
+        <Card className="max-w-4xl mx-auto bg-card-dark mb-8">
+          <CardContent className="p-8 text-center">
+            <h4 className="text-2xl font-bold text-white mb-4">🔍 {t('winners.transparency')}</h4>
+            <p className="text-gray-200 dark:text-gray-300 mb-6">
+              {t('winners.description')}
+            </p>
+            
+            <div className="grid md:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto">
+                  <Video className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-medium">{t('transparency.liveVideo')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('transparency.recorded')}</p>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-medium">{t('transparency.verification')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('transparency.randomAlgorithm')}</p>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto">
+                  <FileText className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-medium">{t('transparency.documentation')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('transparency.completeRecords')}</p>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-medium">{t('transparency.security')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('transparency.secureData')}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Winners Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {winners.map((winner) => (
-          <Card key={winner.id} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
+          <Card key={winner.id} className="bg-card-dark hover:bg-white/20 dark:hover:bg-black/30 transition-all duration-300">
             <CardHeader className="text-center">
               <div className="text-4xl mb-3">{winner.proofImage}</div>
               <CardTitle className="text-white text-lg">{winner.prize}</CardTitle>
@@ -123,11 +188,11 @@ const WinnersList = () => {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="text-center">
-                <p className="text-gray-300 text-sm">{t('winners.winner')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('winners.winner')}</p>
                 <p className="text-white font-bold">{winner.email}</p>
               </div>
               
-              <div className="flex items-center justify-center space-x-2 text-gray-400">
+              <div className="flex items-center justify-center space-x-2 text-gray-300">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm">{winner.date}</span>
               </div>
@@ -146,16 +211,27 @@ const WinnersList = () => {
                     </Badge>
                   )}
                 </div>
-                <p className="text-gray-300 text-xs mb-2">{getProofTypeText(winner.proofType)}</p>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  className="w-full border-blue-500/30 text-blue-400 hover:bg-blue-500/20"
-                  onClick={() => window.open(winner.proofUrl, '_blank')}
-                >
-                  <ExternalLink className="w-3 h-3 mr-1" />
-                  {t('proof.viewProof')}
-                </Button>
+                <p className="text-gray-200 dark:text-gray-300 text-xs mb-2">{getProofTypeText(winner.proofType)}</p>
+                <div className="flex space-x-2">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 border-blue-500/30 text-blue-400 hover:bg-blue-500/20"
+                    onClick={() => window.open(winner.drawProof, '_blank')}
+                  >
+                    <Eye className="w-3 h-3 mr-1" />
+                    {t('proof.viewDraw')}
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 border-green-500/30 text-green-400 hover:bg-green-500/20"
+                    onClick={() => window.open(winner.deliveryProof, '_blank')}
+                  >
+                    <ExternalLink className="w-3 h-3 mr-1" />
+                    {t('proof.viewDelivery')}
+                  </Button>
+                </div>
               </div>
               
               <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-3 text-center">
@@ -171,7 +247,7 @@ const WinnersList = () => {
         <Card className="max-w-2xl mx-auto bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/30">
           <CardContent className="p-6">
             <h3 className="text-2xl font-bold text-white mb-3">🔍 {t('winners.transparency')}</h3>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-200 dark:text-gray-300 mb-4">
               {t('winners.description')}
             </p>
             <div className="grid md:grid-cols-3 gap-4 text-center">
@@ -180,21 +256,21 @@ const WinnersList = () => {
                   <Trophy className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-white font-medium">{t('winners.fairDraw')}</p>
-                <p className="text-gray-300 text-sm">{t('winners.randomAlgorithm')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('winners.randomAlgorithm')}</p>
               </div>
               <div className="space-y-2">
                 <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto">
                   <Gift className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-white font-medium">{t('winners.guaranteedDelivery')}</p>
-                <p className="text-gray-300 text-sm">{t('winners.deliveryTime')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('winners.deliveryTime')}</p>
               </div>
               <div className="space-y-2">
                 <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-white font-medium">{t('winners.regularProofs')}</p>
-                <p className="text-gray-300 text-sm">{t('winners.weeklyUpdate')}</p>
+                <p className="text-gray-200 dark:text-gray-300 text-sm">{t('winners.weeklyUpdate')}</p>
               </div>
             </div>
           </CardContent>
