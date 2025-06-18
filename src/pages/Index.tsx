@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +8,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Header from "@/components/Header";
 import OffersSection from "@/components/OffersSection";
 import SocialMediaSection from "@/components/SocialMediaSection";
+import DrawProofSection from "@/components/DrawProofSection";
 import SocialMediaModal from "@/components/SocialMediaModal";
 import WinnersList from "@/components/WinnersList";
 import ParticipationModal from "@/components/ParticipationModal";
