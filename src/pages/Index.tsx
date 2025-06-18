@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -245,9 +244,6 @@ const Index = () => {
 
       {/* Social Media Section */}
       <SocialMediaSection />
-
-      {/* Draw Proof Section */}
-      <DrawProofSection />
 
       {/* Offers Section */}
       <OffersSection />
