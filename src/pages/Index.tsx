@@ -8,7 +8,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Header from "@/components/Header";
 import OffersSection from "@/components/OffersSection";
 import SocialMediaSection from "@/components/SocialMediaSection";
-import DrawProofSection from "@/components/DrawProofSection";
 import SocialMediaModal from "@/components/SocialMediaModal";
 import WinnersList from "@/components/WinnersList";
 import ParticipationModal from "@/components/ParticipationModal";
@@ -245,9 +244,6 @@ const Index = () => {
 
       {/* Social Media Section */}
       <SocialMediaSection />
-
-      {/* Draw Proof Section */}
-      <DrawProofSection />
 
       {/* Offers Section */}
       <OffersSection />
