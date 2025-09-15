@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import Winners from "./pages/Winners";
 import ThankYou from "./pages/ThankYou";
 import EmailVerification from "./pages/EmailVerification";
+import OfferCompletion from "./pages/OfferCompletion";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/winners" element={<Winners />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/email-verification" element={<EmailVerification />} />
+          <Route path="/offer-completion" element={<OfferCompletion />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
