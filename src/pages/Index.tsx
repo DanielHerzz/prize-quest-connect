@@ -135,7 +135,7 @@ const Index = () => {
               <span className="text-yellow-300 font-semibold">{t('site.subtitle')}</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(255,215,0,0.8)]">
               {t('site.title')}
             </h1>
 
